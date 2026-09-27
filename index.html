@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#4F6D8A">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="婚禮管家">
+<title>婚禮管家</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💍</text></svg>">
+<link rel="stylesheet" href="app.css?v=4">
+</head>
+<body>
+<div id="head"></div>
+<main id="main"><p class="empty">載入中…</p></main>
+<nav class="tabs" id="tabs" hidden>
+  <button type="button" data-go="home">總覽<small></small></button>
+  <button type="button" data-go="todo">待辦<small id="c-todo"></small></button>
+  <button type="button" data-go="guests">賓客<small id="c-guests"></small></button>
+  <button type="button" data-go="money">預算<small id="c-money"></small></button>
+  <button type="button" data-go="more">更多<small></small></button>
+</nav>
+<input type="file" id="fileIn" accept="image/*" hidden>
+<div class="sheet" id="sheet"><div class="scrim" data-close></div><div class="panel" role="dialog" aria-modal="true" id="sheetPanel"></div></div>
+<div class="viewer" id="viewer"><span class="hint">點圖片放大／縮小，也可雙指縮放</span><button class="close" type="button" data-closeviewer>關閉</button><img id="vImg" alt="桌次圖"></div>
+<div class="toast" id="toast" role="status"></div>
+<script type="module" src="app.js?v=4"></script>
+</body>
+</html>
