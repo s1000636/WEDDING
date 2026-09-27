@@ -1,0 +1,525 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#B3242F">
+<title>婚禮籌備本</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💍</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#B3242F; --ink:#2A2123; --muted:#7A6C6E; --paper:#FAF6F6;
+  --panel:#FFFFFF; --line:#ECE1E2; --gold:#A88235; --ok:#3D7A58; --flash:#FCE9C8;
+  --serif:"Noto Serif TC","Songti TC","PMingLiU",serif;
+  --sans:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root{--red:#A8232E;--ink:#F3EBEB;--muted:#B3A3A5;--paper:#181314;--panel:#221B1C;--line:#382D2F;--gold:#D2AE62;--ok:#6DBB8E;--flash:#4A3A1C}
+}
+*,*::before,*::after{box-sizing:inherit}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;padding-bottom:calc(84px + env(safe-area-inset-bottom,0px))}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+button:disabled{cursor:default;opacity:.6}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+.hero{position:relative;overflow:hidden;background:var(--red);color:#fff;padding:22px 20px 18px}
+.hero .xi{position:absolute;right:-18px;top:-28px;font-family:var(--serif);font-weight:900;font-size:190px;line-height:1;opacity:.11;pointer-events:none;user-select:none}
+.hero-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;position:relative}
+.hero h1{margin:0;font-family:var(--serif);font-weight:600;font-size:17px;letter-spacing:.08em;opacity:.92}
+.hero-btns{display:flex;gap:6px;flex:none}
+.pill{font-size:13px;border:1px solid rgba(255,255,255,.55);border-radius:999px;padding:3px 12px}
+.count{position:relative;margin:14px 0 4px;font-family:var(--serif);font-weight:600;font-size:22px}
+.count b{font-weight:900;font-size:64px;line-height:1;letter-spacing:-.02em;margin:0 4px;vertical-align:-6px}
+.facts{position:relative;margin:0;font-size:14px;opacity:.9}
+.prog{position:relative;margin-top:16px}
+.prog-label{font-size:13px;opacity:.9}
+.prog-track{height:4px;background:rgba(255,255,255,.28);border-radius:2px;margin-top:6px;overflow:hidden}
+.prog-bar{height:100%;width:0;background:#fff;border-radius:2px;transition:width .4s ease}
+
+.toolbar{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 20px 4px;font-size:13px;color:var(--muted)}
+.sync{display:flex;align-items:center;gap:6px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--muted)}
+.sync.live .dot{background:var(--ok)}
+.toggle{display:flex;align-items:center;gap:6px;color:var(--ink)}
+.toggle .sw{width:34px;height:20px;border-radius:10px;background:var(--line);position:relative;transition:background .2s}
+.toggle .sw::after{content:"";position:absolute;left:2px;top:2px;width:16px;height:16px;border-radius:50%;background:#fff;transition:transform .2s}
+.toggle[aria-pressed="true"] .sw{background:var(--red)}
+.toggle[aria-pressed="true"] .sw::after{transform:translateX(14px)}
+
+main{max-width:680px;margin:0 auto;padding:4px 16px 24px}
+.intro{color:var(--muted);font-size:14px;margin:8px 4px 4px}
+.grp{margin-top:22px}
+.grp-h{display:flex;align-items:baseline;gap:10px;margin:0 4px 8px}
+.grp-h h2{margin:0;font-family:var(--serif);font-weight:600;font-size:19px}
+.grp-h .sub{font-size:13px;color:var(--muted)}
+.grp-h .now{font-size:12px;color:var(--red);border:1px solid var(--red);border-radius:999px;padding:0 8px;margin-left:auto}
+.grp-h .tally{font-size:13px;color:var(--muted);margin-left:auto}
+.grp-h .now + .tally{margin-left:0}
+ul.items{list-style:none;margin:0;padding:0;background:var(--panel);border:1px solid var(--line);border-radius:12px}
+.item{display:grid;grid-template-columns:34px 1fr;gap:10px;padding:12px 14px;border-top:1px solid var(--line)}
+.item:first-child{border-top:0}
+.item.flash{animation:flash 1.8s ease-out}
+@keyframes flash{0%{background:var(--flash)}100%{background:transparent}}
+.chk{width:26px;height:26px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;margin-top:1px}
+.chk svg{width:16px;height:16px;fill:none;stroke:#fff;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;opacity:0}
+.item.done .chk{background:var(--red);border-color:var(--red)}
+.item.done .chk svg{opacity:1}
+.num{font-family:var(--serif);font-weight:900;font-size:20px;color:var(--gold);text-align:center;line-height:1.3}
+.body{text-align:left;display:block;width:100%}
+.t{display:block}
+.item.done .t{color:var(--muted);text-decoration:line-through}
+.n{display:block;font-size:13px;color:var(--muted);margin-top:2px;white-space:pre-line}
+.vmeta{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;margin-top:6px;font-size:13px;color:var(--muted)}
+.chip{font-size:12px;border-radius:999px;padding:2px 10px;border:1px solid var(--line);color:var(--muted)}
+.chip.s1{border-color:var(--gold);color:var(--gold)}
+.chip.s2{border-color:var(--gold);background:var(--gold);color:#fff}
+.chip.s3{border-color:var(--ok);background:var(--ok);color:#fff}
+.add{display:block;width:100%;text-align:left;padding:10px 14px;font-size:14px;color:var(--red)}
+.empty{text-align:center;color:var(--muted);padding:40px 12px}
+
+/* 桌次 */
+.charts{display:grid;gap:12px}
+.chart{margin:0;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.chart img{display:block;width:100%;height:auto;background:var(--line)}
+.chart figcaption{display:flex;justify-content:space-between;align-items:center;padding:8px 14px;font-size:13px;color:var(--muted)}
+.chart figcaption button{color:var(--red)}
+.upload{border:1.5px dashed var(--line);border-radius:12px;padding:22px 14px;text-align:center;color:var(--red);width:100%}
+.stats{display:flex;flex-wrap:wrap;gap:4px 18px;margin:0 4px 10px;font-size:14px;color:var(--muted)}
+.stats b{color:var(--ink);font-size:18px;font-family:var(--serif)}
+.tno{font-family:var(--serif);font-weight:900;font-size:22px;color:var(--red);text-align:center;line-height:1.2}
+.side{font-size:12px;border-radius:4px;padding:0 6px;margin-right:6px;border:1px solid currentColor}
+.side.m{color:#2F5E8C}.side.f{color:var(--red)}.side.j{color:var(--gold)}
+@media (prefers-color-scheme:dark){.side.m{color:#8DB6E0}}
+
+nav.tabs{position:fixed;left:0;right:0;bottom:0;background:var(--panel);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(5,1fr);padding-bottom:env(safe-area-inset-bottom,0px);z-index:5}
+nav.tabs button{padding:10px 0 12px;font-size:14px;color:var(--muted);position:relative}
+nav.tabs button small{display:block;font-size:11px;opacity:.8;min-height:1.2em}
+nav.tabs button[aria-current="page"]{color:var(--red);font-weight:700}
+nav.tabs button[aria-current="page"]::before{content:"";position:absolute;top:0;left:28%;right:28%;height:3px;background:var(--red);border-radius:0 0 3px 3px}
+
+.sheet{position:fixed;inset:0;z-index:10;display:none}
+.sheet.open{display:block}
+.scrim{position:absolute;inset:0;background:rgba(20,10,12,.45)}
+.panel{position:absolute;left:0;right:0;bottom:0;max-height:88%;overflow:auto;background:var(--panel);border-radius:18px 18px 0 0;padding:18px 20px calc(18px + env(safe-area-inset-bottom,0px));max-width:680px;margin:0 auto;animation:up .22s ease-out}
+@keyframes up{from{transform:translateY(24px);opacity:.6}to{transform:none;opacity:1}}
+.panel h3{margin:0 0 12px;font-family:var(--serif);font-weight:600;font-size:18px}
+.field{display:block;margin-bottom:12px}
+.field span{display:block;font-size:13px;color:var(--muted);margin-bottom:4px}
+.field input,.field textarea,.field select{width:100%;font:inherit;font-size:16px;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:9px 11px}
+.field textarea{resize:vertical;min-height:70px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.actions{display:flex;gap:10px;margin-top:6px}
+.grow{flex:1}
+.btn{border-radius:10px;padding:10px 16px;font-weight:500}
+.btn.primary{background:var(--red);color:#fff}
+.btn.ghost{border:1px solid var(--line)}
+.btn.danger{color:var(--red)}
+
+.viewer{position:fixed;inset:0;z-index:30;background:#000;display:none;overflow:auto;-webkit-overflow-scrolling:touch}
+.viewer.open{display:block}
+.viewer img{display:block;width:100%;height:auto;margin:auto;padding-top:calc(52px + env(safe-area-inset-top,0px))}
+.viewer.zoom img{width:250%;max-width:none}
+.viewer .close{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));right:12px;color:#fff;background:rgba(0,0,0,.55);border-radius:999px;padding:6px 16px;z-index:31}
+.viewer .hint{position:fixed;top:calc(14px + env(safe-area-inset-top,0px));left:16px;color:#ccc;font-size:13px;z-index:31}
+
+.landing{max-width:520px;margin:0 auto;padding:40px 24px;text-align:center}
+.landing h2{font-family:var(--serif);font-size:24px;margin:0 0 10px}
+.landing p{color:var(--muted)}
+.toast{position:fixed;left:50%;bottom:calc(92px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--paper);font-size:14px;padding:8px 16px;border-radius:999px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:40;max-width:90vw}
+.toast.show{opacity:1}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="xi" aria-hidden="true">囍</div>
+  <div class="hero-top">
+    <h1 id="hTitle">婚禮籌備本</h1>
+    <div class="hero-btns" id="heroBtns" hidden>
+      <button class="pill" id="share" type="button">分享連結</button>
+      <button class="pill" id="editMeta" type="button">修改</button>
+    </div>
+  </div>
+  <p class="count" id="hCount"></p>
+  <p class="facts"><span id="hDate"></span><br><span id="hPlace"></span></p>
+  <div class="prog" id="prog" hidden>
+    <div class="prog-label" id="progLabel"></div>
+    <div class="prog-track"><div class="prog-bar" id="progBar"></div></div>
+  </div>
+</header>
+
+<div class="toolbar" id="toolbar" hidden>
+  <div class="sync" id="sync"><span class="dot"></span><span id="syncText">連線中</span></div>
+  <button class="toggle" id="hideDone" type="button" aria-pressed="false"><span class="sw"></span>隱藏已完成</button>
+</div>
+
+<main id="main"></main>
+
+<nav class="tabs" id="tabs" hidden>
+  <button type="button" data-tab="timeline">時間表<small id="c-timeline"></small></button>
+  <button type="button" data-tab="vendors">廠商<small id="c-vendors"></small></button>
+  <button type="button" data-tab="family">分工<small id="c-family"></small></button>
+  <button type="button" data-tab="pitfalls">提醒<small id="c-pitfalls"></small></button>
+  <button type="button" data-tab="seating">桌次<small id="c-seating"></small></button>
+</nav>
+
+<input type="file" id="fileIn" accept="image/*" hidden>
+<div class="sheet" id="sheet"><div class="scrim" data-close></div><div class="panel" role="dialog" aria-modal="true" id="sheetPanel"></div></div>
+<div class="viewer" id="viewer"><span class="hint">點圖片放大／縮小，也可雙指縮放</span><button class="close" type="button" id="vClose">關閉</button><img id="vImg" alt="桌次圖"></div>
+<div class="toast" id="toast" role="status"></div>
+
+<script type="module">
+// ================================================================
+// 1) 把 Firebase 主控台給你的設定貼在這裡（其他地方都不用改）
+// ================================================================
+const firebaseConfig = {
+  apiKey: "AIzaSyD6ioF2U-C5qxbRRCBe8J_-GJdmpA33X6A",
+  authDomain: "wedding-2027-52a82.firebaseapp.com",
+  projectId: "wedding-2027-52a82",
+  storageBucket: "wedding-2027-52a82.firebasestorage.app",
+  messagingSenderId: "147780920702",
+  appId: "1:147780920702:web:ad3beed3770f54c437bf2f"
+};
+// ================================================================
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { initializeFirestore, persistentLocalCache, persistentMultipleTabManager, doc, collection,
+  onSnapshot, setDoc, updateDoc, deleteDoc, addDoc, runTransaction, writeBatch
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const SEED = {"items":[["f01",{"section":"family","g":"雙方共同","gk":"1","o":0,"text":"共同訂預算上限與分攤方式","note":"常見做法：宴客費依雙方桌數比例分攤，禮金各自收","done":false}],["f02",{"section":"family","g":"雙方共同","gk":"1","o":1,"text":"共同確認禮俗","note":"本次不辦迎娶；文定是否簡化或與宴客同日","done":false}],["f03",{"section":"family","g":"雙方共同","gk":"1","o":2,"text":"桌次由新人統整","note":"雙方各交一份名單與優先順序","done":false}],["f04",{"section":"family","g":"雙方共同","gk":"1","o":3,"text":"當天各派 1–2 位收禮人員","note":"雙方交叉點收，當晚封存","done":false}],["f05",{"section":"family","g":"男方","gk":"2","o":0,"text":"聘金、聘禮與喜餅費用","note":"傳統由男方負擔，現代多可協商","done":false}],["f06",{"section":"family","g":"男方","gk":"2","o":1,"text":"男方親友名單與喜帖寄送","note":"","done":false}],["f07",{"section":"family","g":"男方","gk":"2","o":2,"text":"男方長輩接送與男方招待","note":"","done":false}],["f08",{"section":"family","g":"男方","gk":"2","o":3,"text":"婚戒、西裝","note":"","done":false}],["f09",{"section":"family","g":"女方","gk":"3","o":0,"text":"女方親友名單與喜帖寄送","note":"","done":false}],["f10",{"section":"family","g":"女方","gk":"3","o":1,"text":"喜餅分送女方親友","note":"","done":false}],["f11",{"section":"family","g":"女方","gk":"3","o":2,"text":"嫁妝與回禮","note":"依雙方共識決定","done":false}],["f12",{"section":"family","g":"女方","gk":"3","o":3,"text":"新娘造型與禮服","note":"","done":false}],["p01",{"section":"pitfalls","g":"常見踩雷","gk":"0","o":0,"text":"場地合約只看桌價","note":"問清楚保證桌數、10% 服務費、開瓶費、外部廠商進場費、佈置與撤場時間；300 人要實地確認後排看得到舞台","done":false}],["p02",{"section":"pitfalls","g":"常見踩雷","gk":"0","o":1,"text":"廠商只有口頭約定","note":"婚攝、新秘、主持都要簽約，寫明服務時數、超時費、交件時間、臨時生病的代班人選與取消退費","done":false}],["p03",{"section":"pitfalls","g":"常見踩雷","gk":"0","o":2,"text":"賓客人數估太樂觀","note":"喜帖附回覆表單，最終人數依回覆保守抓，預留 1–2 桌彈性；保證桌數送出後通常只能加不能減","done":false}],["t01",{"section":"timeline","g":"2026年10月","gk":"2026-10","o":0,"text":"雙方家長正式見面：確認婚期、合辦一場宴客、預算上限與禮俗（本次不辦迎娶，文定是否簡化）","note":"","done":false}],["t02",{"section":"timeline","g":"2026年10月","gk":"2026-10","o":1,"text":"請長輩或擇日老師確認 2027/6/12（約農曆五月初，先問長輩是否介意）","note":"","done":false}],["t03",{"section":"timeline","g":"2026年10月","gk":"2026-10","o":2,"text":"艾麗酒店看廳：確認 6/12 檔期、廳型能否擺 30 桌加舞台，談妥後簽約付訂","note":"","done":false}],["t04",{"section":"timeline","g":"2026年10月","gk":"2026-10","o":3,"text":"決定是否聘請婚顧（全案或當日執行）並簽約","note":"","done":false}],["t05",{"section":"timeline","g":"2026年10月","gk":"2026-10","o":4,"text":"雙方各列初步賓客名單，總數先抓 320 人上限","note":"","done":false}],["t06",{"section":"timeline","g":"2026年10月","gk":"2026-10","o":5,"text":"建立總預算表：場地、婚攝、新秘、禮服、佈置、喜餅、喜帖、小物、紅包","note":"","done":false}],["t07",{"section":"timeline","g":"2026年11月","gk":"2026-11","o":0,"text":"婚攝、婚錄看完整作品（重點看宴會廳室內光線）後簽約","note":"","done":false}],["t08",{"section":"timeline","g":"2026年11月","gk":"2026-11","o":1,"text":"新娘秘書簽約：確認造型套數、是否跟妝到送客","note":"","done":false}],["t09",{"section":"timeline","g":"2026年11月","gk":"2026-11","o":2,"text":"婚禮主持人面談並簽約","note":"","done":false}],["t10",{"section":"timeline","g":"2026年11月","gk":"2026-11","o":3,"text":"選定婚紗攝影與禮服店，確認租借件數與取件日","note":"","done":false}],["t11",{"section":"timeline","g":"2026年11月","gk":"2026-11","o":4,"text":"定下婚禮風格與主色，提供給婚顧與花藝參考","note":"","done":false}],["t12",{"section":"timeline","g":"2026年12月","gk":"2026-12","o":0,"text":"花藝佈置詢價：先問飯店配合廠商與外部廠商進場規定","note":"","done":false}],["t13",{"section":"timeline","g":"2026年12月","gk":"2026-12","o":1,"text":"喜餅試吃，比較價格與盒數優惠","note":"","done":false}],["t14",{"section":"timeline","g":"2026年12月","gk":"2026-12","o":2,"text":"挑選或訂製婚戒","note":"","done":false}],["t15",{"section":"timeline","g":"2026年12月","gk":"2026-12","o":3,"text":"安排婚紗照拍攝日期（避開農曆年）","note":"","done":false}],["t16",{"section":"timeline","g":"2026年12月","gk":"2026-12","o":4,"text":"邀請伴郎伴娘","note":"","done":false}],["t17",{"section":"timeline","g":"2027年1月","gk":"2027-01","o":0,"text":"拍攝婚紗照","note":"","done":false}],["t18",{"section":"timeline","g":"2027年1月","gk":"2027-01","o":1,"text":"喜帖設計（紙本加電子喜帖），附回函或線上回覆表單","note":"","done":false}],["t19",{"section":"timeline","g":"2027年1月","gk":"2027-01","o":2,"text":"蜜月行程規劃與訂機票","note":"","done":false}],["t20",{"section":"timeline","g":"2027年1月","gk":"2027-01","o":3,"text":"與雙方家長談定聘金、禮品與喜餅盒數","note":"","done":false}],["t21",{"section":"timeline","g":"2027年2月","gk":"2027-02","o":0,"text":"農曆年拜年時口頭告知親友婚期，初步確認出席","note":"","done":false}],["t22",{"section":"timeline","g":"2027年2月","gk":"2027-02","o":1,"text":"喜帖定稿送印","note":"","done":false}],["t23",{"section":"timeline","g":"2027年2月","gk":"2027-02","o":2,"text":"喜餅下訂，確認交貨日與寄送方式","note":"","done":false}],["t24",{"section":"timeline","g":"2027年2月","gk":"2027-02","o":3,"text":"婚禮流程初稿：進場次數、敬酒、送客","note":"","done":false}],["t25",{"section":"timeline","g":"2027年2月","gk":"2027-02","o":4,"text":"二進禮服與婚禮小物確認","note":"","done":false}],["t26",{"section":"timeline","g":"2027年3月","gk":"2027-03","o":0,"text":"艾麗試菜，定菜單與酒水（確認開瓶費、可否自帶酒）","note":"","done":false}],["t27",{"section":"timeline","g":"2027年3月","gk":"2027-03","o":1,"text":"花藝佈置、主桌與迎賓區設計定案","note":"","done":false}],["t28",{"section":"timeline","g":"2027年3月","gk":"2027-03","o":2,"text":"準備成長與愛情影片素材","note":"","done":false}],["t29",{"section":"timeline","g":"2027年3月","gk":"2027-03","o":3,"text":"婚鞋、飾品、西裝購買或訂製","note":"","done":false}],["t30",{"section":"timeline","g":"2027年4月","gk":"2027-04","o":0,"text":"寄出喜帖（婚前約 6–8 週），電子喜帖同步傳送","note":"","done":false}],["t31",{"section":"timeline","g":"2027年4月","gk":"2027-04","o":1,"text":"決定招待與收禮人員，雙方各派可靠的人","note":"","done":false}],["t32",{"section":"timeline","g":"2027年4月","gk":"2027-04","o":2,"text":"決定結婚登記日期（戶政事務所）","note":"","done":false}],["t33",{"section":"timeline","g":"2027年4月","gk":"2027-04","o":3,"text":"新秘試妝、確認髮型","note":"","done":false}],["t34",{"section":"timeline","g":"2027年5月","gk":"2027-05","o":0,"text":"統計回覆，追問未回覆的賓客","note":"","done":false}],["t35",{"section":"timeline","g":"2027年5月","gk":"2027-05","o":1,"text":"排桌次與座位表（主桌、長輩桌、同事桌分開）","note":"","done":false}],["t36",{"section":"timeline","g":"2027年5月","gk":"2027-05","o":2,"text":"與婚顧、主持、婚攝、新秘開最終確認會，對齊當天時間表","note":"","done":false}],["t37",{"section":"timeline","g":"2027年5月","gk":"2027-05","o":3,"text":"分送喜餅（以女方親友為主）","note":"","done":false}],["t38",{"section":"timeline","g":"2027年5月","gk":"2027-05","o":4,"text":"準備紅包：車馬費、工作人員、伴郎伴娘","note":"","done":false}],["t39",{"section":"timeline","g":"2027年5月","gk":"2027-05","o":5,"text":"列出各廠商尾款日期與現金準備","note":"","done":false}],["t40",{"section":"timeline","g":"2027年6月（婚禮前一週）","gk":"2027-06","o":0,"text":"依合約天數向艾麗回報最終保證桌數","note":"","done":false}],["t41",{"section":"timeline","g":"2027年6月（婚禮前一週）","gk":"2027-06","o":1,"text":"當天物品清單：婚戒、禮服、簽名本、紅包袋、收禮箱","note":"","done":false}],["t42",{"section":"timeline","g":"2027年6月（婚禮前一週）","gk":"2027-06","o":2,"text":"最後彩排與進場走位","note":"","done":false}],["t43",{"section":"timeline","g":"2027年6月（婚禮前一週）","gk":"2027-06","o":3,"text":"安排當天交通與長輩接送","note":"","done":false}],["t44",{"section":"timeline","g":"2027年6月（婚禮前一週）","gk":"2027-06","o":4,"text":"保養、休息、早點睡","note":"","done":false}],["v01",{"section":"vendors","g":"建議詢價順序","gk":"0","o":0,"text":"場地與餐飲：台北艾麗酒店","note":"先確認檔期、保證桌數、服務費、最低消費；餐廳即飯店宴席，試菜另約","done":false,"status":"未詢價","quote":"","contact":""}],["v02",{"section":"vendors","g":"建議詢價順序","gk":"0","o":1,"text":"婚禮顧問","note":"全案或當日執行，越早找越能幫你談其他廠商","done":false,"status":"未詢價","quote":"","contact":""}],["v03",{"section":"vendors","g":"建議詢價順序","gk":"0","o":2,"text":"婚攝與婚錄","note":"熱門攝影師的六月週六通常半年到一年前就滿","done":false,"status":"未詢價","quote":"","contact":""}],["v04",{"section":"vendors","g":"建議詢價順序","gk":"0","o":3,"text":"新娘秘書","note":"","done":false,"status":"未詢價","quote":"","contact":""}],["v05",{"section":"vendors","g":"建議詢價順序","gk":"0","o":4,"text":"婚禮主持人","note":"雙語或台語需求先講清楚","done":false,"status":"未詢價","quote":"","contact":""}],["v06",{"section":"vendors","g":"建議詢價順序","gk":"0","o":5,"text":"婚紗攝影與禮服","note":"","done":false,"status":"未詢價","quote":"","contact":""}],["v07",{"section":"vendors","g":"建議詢價順序","gk":"0","o":6,"text":"花藝佈置","note":"問飯店指定廠商與外部進場費","done":false,"status":"未詢價","quote":"","contact":""}],["v08",{"section":"vendors","g":"建議詢價順序","gk":"0","o":7,"text":"喜餅","note":"","done":false,"status":"未詢價","quote":"","contact":""}],["v09",{"section":"vendors","g":"建議詢價順序","gk":"0","o":8,"text":"喜帖設計印刷","note":"","done":false,"status":"未詢價","quote":"","contact":""}],["v10",{"section":"vendors","g":"建議詢價順序","gk":"0","o":9,"text":"婚戒","note":"","done":false,"status":"未詢價","quote":"","contact":""}],["v11",{"section":"vendors","g":"建議詢價順序","gk":"0","o":10,"text":"音控、樂團或現場表演","note":"視預算，先問飯店音響設備","done":false,"status":"未詢價","quote":"","contact":""}],["v12",{"section":"vendors","g":"建議詢價順序","gk":"0","o":11,"text":"婚禮小物","note":"","done":false,"status":"未詢價","quote":"","contact":""}]],"tables":[["tb01",{"no":1,"area":"主桌","side":"共同","relation":"新人與雙方父母","names":"新郎、新娘、雙方父母、雙方祖父母","count":10,"note":""}]]};
+const DEFAULT_META = {title:'我們的婚禮', date:'2027-06-12', venue:'台北艾麗酒店', guests:300};
+
+const $=s=>document.querySelector(s);
+const SECT={timeline:'時間表',vendors:'廠商',family:'分工',pitfalls:'提醒',seating:'桌次'};
+const INTRO={
+  timeline:'每月必辦事項。勾選後，所有打開這個連結的手機都會同步更新。',
+  vendors:'數字是建議詢價順序，越前面越早滿檔。點狀態可切換。',
+  family:'現代婚禮多由雙方協商，以下是常見分法，可直接修改。',
+  pitfalls:'最常見、事後最難補救的三件事。確認過就打勾。',
+  seating:'上傳桌次圖，並在下方逐桌記錄賓客。點圖片可放大看。'
+};
+const VSTAT=['未詢價','詢價中','已報價','已簽約'];
+const SIDES=['男方','女方','共同'];
+const WD='日一二三四五六';
+const ls={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+
+let tab=ls.get('wp-tab'); if(!SECT[tab]) tab='timeline';
+let hideDone=ls.get('wp-hide')==='1';
+let db=null, wid=null, conn='connecting', loaded=false;
+const items=new Map(), tables=new Map(), charts=new Map(), flash=new Set(), mine=new Map();
+let meta={...DEFAULT_META};
+let editing=null;
+
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function parseDate(s){const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(s||'');return m?new Date(+m[1],+m[2]-1,+m[3]):null}
+function today(){const t=new Date();t.setHours(0,0,0,0);return t}
+function ym(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')}
+let toastT;
+function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),2600)}
+function newId(){const a=new Uint8Array(16);crypto.getRandomValues(a);return [...a].map(b=>b.toString(16).padStart(2,'0')).join('')}
+function wref(...p){return doc(db,'weddings',wid,...p)}
+function cref(name){return collection(db,'weddings',wid,name)}
+async function save(key,fn){
+  mine.set(key,Date.now());
+  try{await fn()}catch(e){console.error(e);toast(e&&e.code==='permission-denied'?'沒有寫入權限，請檢查 Firestore 規則':'儲存失敗，請檢查網路後再試')}
+}
+
+// ---------- hero ----------
+function renderHero(){
+  const d=parseDate(meta.date);
+  $('#hTitle').textContent=meta.title||'我們的婚禮';
+  if(d){
+    const n=Math.round((d-today())/864e5);
+    $('#hCount').innerHTML=n>0?'還有<b>'+n+'</b>天':n===0?'就是今天':'婚禮已圓滿完成';
+    $('#hDate').textContent=d.getFullYear()+'年'+(d.getMonth()+1)+'月'+d.getDate()+'日（'+WD[d.getDay()]+'）';
+  }else{$('#hCount').textContent='尚未設定婚期';$('#hDate').textContent=''}
+  $('#hPlace').textContent=(meta.venue||'')+(meta.guests?'，約 '+meta.guests+' 位賓客':'');
+}
+
+// ---------- lists ----------
+function list(sec){const a=[];items.forEach(i=>{if(i.section===sec)a.push(i)});return a}
+function isDone(i){return i.section==='vendors'?i.status==='已簽約':!!i.done}
+function groups(sec){
+  const m=new Map();
+  for(const i of list(sec)){const k=String(i.gk||'0');if(!m.has(k))m.set(k,{gk:k,g:i.g||'',items:[]});m.get(k).items.push(i)}
+  const out=[...m.values()].sort((a,b)=>a.gk<b.gk?-1:a.gk>b.gk?1:0);
+  out.forEach(g=>g.items.sort((a,b)=>(a.o||0)-(b.o||0)||(a.id<b.id?-1:1)));
+  return out;
+}
+function monthSub(gk){
+  const w=parseDate(meta.date), m=/^(\d{4})-(\d{2})$/.exec(gk); if(!w||!m) return '';
+  const diff=(w.getFullYear()*12+w.getMonth())-(+m[1]*12+(+m[2]-1));
+  return diff>0?'婚前 '+diff+' 個月':diff===0?'婚禮當月':'';
+}
+function sortedTables(){return [...tables.values()].sort((a,b)=>(+a.no||0)-(+b.no||0)||(a.id<b.id?-1:1))}
+function seatStats(){const s={total:0,m:0,f:0,j:0};for(const t of tables.values()){const c=+t.count||0;s.total+=c;if(t.side==='男方')s.m+=c;else if(t.side==='女方')s.f+=c;else s.j+=c}return s}
+
+function row(i,idx){
+  const d=isDone(i);
+  const lead=i.section==='vendors'
+    ?'<span class="num">'+idx+'</span>'
+    :'<button type="button" class="chk" data-toggle="'+esc(i.id)+'" aria-pressed="'+d+'" aria-label="'+(d?'標為未完成':'標為完成')+'"><svg viewBox="0 0 20 20"><path d="M5 10.5l3.2 3.2L15 7"/></svg></button>';
+  let v='';
+  if(i.section==='vendors'){
+    const s=Math.max(0,VSTAT.indexOf(i.status));
+    v='<div class="vmeta"><button type="button" class="chip s'+s+'" data-cycle="'+esc(i.id)+'">'+VSTAT[s]+'</button>'+
+      (i.quote?'<span>報價 '+esc(i.quote)+'</span>':'')+(i.contact?'<span>'+esc(i.contact)+'</span>':'')+'</div>';
+  }
+  return '<li class="item'+(d?' done':'')+(flash.has(i.id)?' flash':'')+'">'+lead+
+    '<div><button type="button" class="body" data-edit="'+esc(i.id)+'"><span class="t">'+esc(i.text)+'</span>'+
+    (i.note?'<span class="n">'+esc(i.note)+'</span>':'')+'</button>'+v+'</div></li>';
+}
+
+function renderSeating(){
+  const st=seatStats(), ts=sortedTables();
+  $('#progLabel').textContent='已排 '+ts.length+' 桌，共 '+st.total+' 人';
+  $('#progBar').style.width=meta.guests?Math.min(100,st.total/meta.guests*100)+'%':'0';
+  let h='<p class="intro">'+INTRO.seating+'</p><section class="grp"><div class="grp-h"><h2>桌次圖</h2><span class="tally">'+charts.size+' 張</span></div><div class="charts">';
+  [...charts.values()].sort((a,b)=>(a.createdAt||0)-(b.createdAt||0)).forEach(c=>{
+    h+='<figure class="chart'+(flash.has(c.id)?' flash':'')+'"><button type="button" data-view="'+esc(c.id)+'"><img src="'+esc(c.img)+'" alt="'+esc(c.name||'桌次圖')+'" loading="lazy"></button>'+
+      '<figcaption><span>'+esc(c.name||'桌次圖')+'</span><button type="button" data-delchart="'+esc(c.id)+'">刪除</button></figcaption></figure>';
+  });
+  h+='<button type="button" class="upload" id="uploadBtn">'+(charts.size?'＋ 再上傳一張（新版桌次圖）':'＋ 上傳桌次圖')+'</button></div></section>';
+  h+='<section class="grp"><div class="grp-h"><h2>各桌賓客</h2></div>'+
+    '<div class="stats"><span>總人數 <b>'+st.total+'</b></span><span>男方 <b>'+st.m+'</b></span><span>女方 <b>'+st.f+'</b></span><span>共同 <b>'+st.j+'</b></span><span>桌數 <b>'+ts.length+'</b></span></div>'+
+    '<ul class="items">';
+  if(!ts.length) h+='<li class="item"><span></span><span class="n">還沒有桌次，按下方新增。</span></li>';
+  for(const t of ts){
+    const sc=t.side==='男方'?'m':t.side==='女方'?'f':'j';
+    h+='<li class="item'+(flash.has(t.id)?' flash':'')+'"><span class="tno">'+esc(t.no)+'</span><div><button type="button" class="body" data-table="'+esc(t.id)+'">'+
+      '<span class="t"><span class="side '+sc+'">'+esc(t.side||'共同')+'</span>'+esc(t.area||'第 '+t.no+' 桌')+(t.relation?'｜'+esc(t.relation):'')+'　'+(+t.count||0)+' 人</span>'+
+      (t.names?'<span class="n">'+esc(t.names)+'</span>':'')+(t.note?'<span class="n">備註：'+esc(t.note)+'</span>':'')+'</button></div></li>';
+  }
+  h+='</ul><button type="button" class="add" id="addTable">＋ 新增一桌</button></section>';
+  return h;
+}
+
+function render(){
+  document.querySelectorAll('#tabs button').forEach(b=>{
+    const k=b.dataset.tab;
+    if(k===tab) b.setAttribute('aria-current','page'); else b.removeAttribute('aria-current');
+    if(k==='seating'){$('#c-seating').textContent=tables.size?tables.size+'桌':''}
+    else{const a=list(k);$('#c-'+k).textContent=a.length?a.filter(isDone).length+'/'+a.length:''}
+  });
+  $('#hideDone').style.visibility=tab==='seating'?'hidden':'visible';
+  $('#hideDone').setAttribute('aria-pressed',hideDone);
+  $('#sync').className='sync'+(conn==='live'?' live':'');
+  $('#syncText').textContent=conn==='live'?'即時同步中':conn==='connecting'?'連線中':'連線中斷，恢復後會自動同步';
+  renderHero();
+  const main=$('#main');
+  if(!loaded){main.innerHTML='<p class="empty">正在載入籌備本…</p>';return}
+  if(tab==='seating'){main.innerHTML=renderSeating();return}
+  const all=list(tab), done=all.filter(isDone).length;
+  $('#progLabel').textContent=SECT[tab]+'已完成 '+done+' / '+all.length;
+  $('#progBar').style.width=all.length?(done/all.length*100)+'%':'0';
+  let h='<p class="intro">'+INTRO[tab]+'</p>';
+  const gs=groups(tab), nowYM=ym(today());
+  if(!gs.length) h+='<div class="empty">這裡還沒有項目。<br><button type="button" class="add" style="text-align:center" data-add="1" data-gk="0" data-g="'+esc(SECT[tab])+'">新增第一項</button></div>';
+  let vi=0;
+  for(const g of gs){
+    const gd=g.items.filter(isDone).length, isNow=tab==='timeline'&&g.gk===nowYM;
+    h+='<section class="grp"><div class="grp-h"><h2>'+esc(g.g)+'</h2>'+(tab==='timeline'?'<span class="sub">'+monthSub(g.gk)+'</span>':'')+
+      (isNow?'<span class="now">本月</span>':'')+'<span class="tally">'+gd+'/'+g.items.length+'</span></div><ul class="items">';
+    let shown=0;
+    for(const i of g.items){vi++; if(!(hideDone&&isDone(i))){h+=row(i,vi);shown++}}
+    if(!shown) h+='<li class="item"><span></span><span class="n">這組都完成了</span></li>';
+    h+='</ul><button type="button" class="add" data-add="1" data-gk="'+esc(g.gk)+'" data-g="'+esc(g.g)+'">＋ 新增一項</button></section>';
+  }
+  main.innerHTML=h;
+}
+
+// ---------- sheets ----------
+function openSheet(html){$('#sheetPanel').innerHTML=html;$('#sheet').classList.add('open')}
+function closeSheet(){$('#sheet').classList.remove('open');editing=null}
+function maxO(sec,gk){let m=-1;for(const i of list(sec)) if(String(i.gk)===String(gk)&&(i.o||0)>m) m=i.o||0;return m}
+function actions(del,saveId){return '<div class="actions">'+(del?'<button type="button" class="btn danger" id="del">刪除</button>':'')+'<span class="grow"></span><button type="button" class="btn ghost" data-close>取消</button><button type="button" class="btn primary" id="'+saveId+'">儲存</button></div>'}
+
+function openItem(id,preset){
+  const it=id?items.get(id):Object.assign({section:tab,text:'',note:'',status:'未詢價',quote:'',contact:''},preset);
+  if(!it) return;
+  editing={kind:'item',id,section:it.section,gk:String(it.gk),g:it.g};
+  const gs=groups(it.section);
+  if(!gs.some(g=>g.gk===String(it.gk))) gs.push({gk:String(it.gk),g:it.g});
+  let h='<h3>'+(id?'編輯項目':'新增項目')+'</h3>'+
+    '<label class="field"><span>內容</span><textarea id="fText" rows="2">'+esc(it.text)+'</textarea></label>'+
+    '<label class="field"><span>備註</span><textarea id="fNote" rows="2" placeholder="例如：已約 11/9 看場地">'+esc(it.note)+'</textarea></label>';
+  if(gs.length>1) h+='<label class="field"><span>分組</span><select id="fGroup">'+gs.map(g=>'<option value="'+esc(g.gk)+'" data-g="'+esc(g.g)+'"'+(g.gk===String(it.gk)?' selected':'')+'>'+esc(g.g)+'</option>').join('')+'</select></label>';
+  if(it.section==='vendors'){
+    h+='<label class="field"><span>狀態</span><select id="fStatus">'+VSTAT.map(s=>'<option'+(s===(it.status||'未詢價')?' selected':'')+'>'+s+'</option>').join('')+'</select></label>'+
+      '<div class="row2"><label class="field"><span>報價</span><input id="fQuote" value="'+esc(it.quote)+'" placeholder="每桌 $22,000"></label>'+
+      '<label class="field"><span>聯絡人</span><input id="fContact" value="'+esc(it.contact)+'" placeholder="姓名或電話"></label></div>';
+  }
+  openSheet(h+actions(!!id,'saveItem'));
+  if(!id) setTimeout(()=>$('#fText')&&$('#fText').focus(),50);
+}
+function saveItem(){
+  const text=$('#fText').value.trim(); if(!text){toast('請先填寫內容');return}
+  const sel=$('#fGroup'), gk=sel?sel.value:editing.gk, g=sel?sel.selectedOptions[0].dataset.g:editing.g;
+  const body={text,note:$('#fNote').value.trim(),gk,g,updatedAt:Date.now()};
+  if(editing.section==='vendors'){body.status=$('#fStatus').value;body.quote=$('#fQuote').value.trim();body.contact=$('#fContact').value.trim()}
+  const ed=editing;
+  if(ed.id){
+    const cur=items.get(ed.id); if(cur&&String(cur.gk)!==gk) body.o=maxO(ed.section,gk)+1;
+    save(ed.id,()=>updateDoc(wref('items',ed.id),body));
+  }else{
+    Object.assign(body,{section:ed.section,done:false,o:maxO(ed.section,gk)+1});
+    const r=doc(cref('items')); save(r.id,()=>setDoc(r,body));
+  }
+  closeSheet(); toast('已儲存');
+}
+
+function openTable(id){
+  const ts=sortedTables();
+  const t=id?tables.get(id):{no:(ts.length?Math.max(...ts.map(x=>+x.no||0)):0)+1,area:'',side:'男方',relation:'',names:'',count:10,note:''};
+  if(!t) return;
+  editing={kind:'table',id};
+  openSheet('<h3>'+(id?'編輯第 '+esc(t.no)+' 桌':'新增一桌')+'</h3>'+
+    '<div class="row2"><label class="field"><span>桌號</span><input id="tNo" type="number" inputmode="numeric" value="'+esc(t.no)+'"></label>'+
+    '<label class="field"><span>人數</span><input id="tCount" type="number" inputmode="numeric" value="'+esc(t.count)+'"></label></div>'+
+    '<div class="row2"><label class="field"><span>哪一方</span><select id="tSide">'+SIDES.map(s=>'<option'+(s===t.side?' selected':'')+'>'+s+'</option>').join('')+'</select></label>'+
+    '<label class="field"><span>區域</span><input id="tArea" value="'+esc(t.area)+'" placeholder="主桌、舞台左"></label></div>'+
+    '<label class="field"><span>關係</span><input id="tRel" value="'+esc(t.relation)+'" placeholder="例如：男方大學同學"></label>'+
+    '<label class="field"><span>賓客名單</span><textarea id="tNames" rows="3" placeholder="用頓號或換行分隔">'+esc(t.names)+'</textarea></label>'+
+    '<label class="field"><span>備註</span><input id="tNote" value="'+esc(t.note)+'" placeholder="例如：2 位素食、1 張兒童椅"></label>'+
+    actions(!!id,'saveTable'));
+}
+function saveTable(){
+  const body={no:parseInt($('#tNo').value,10)||0,count:parseInt($('#tCount').value,10)||0,side:$('#tSide').value,area:$('#tArea').value.trim(),
+    relation:$('#tRel').value.trim(),names:$('#tNames').value.trim(),note:$('#tNote').value.trim(),updatedAt:Date.now()};
+  const ed=editing;
+  if(ed.id) save(ed.id,()=>updateDoc(wref('tables',ed.id),body));
+  else{const r=doc(cref('tables'));save(r.id,()=>setDoc(r,body))}
+  closeSheet(); toast('已儲存');
+}
+
+function openMeta(){
+  editing={kind:'meta'};
+  openSheet('<h3>婚禮資訊</h3>'+
+    '<label class="field"><span>名稱</span><input id="mTitle" value="'+esc(meta.title)+'"></label>'+
+    '<label class="field"><span>婚期</span><input id="mDate" type="date" value="'+esc(meta.date)+'"></label>'+
+    '<div class="row2"><label class="field"><span>地點</span><input id="mVenue" value="'+esc(meta.venue)+'"></label>'+
+    '<label class="field"><span>賓客人數</span><input id="mGuests" type="number" inputmode="numeric" value="'+esc(meta.guests)+'"></label></div>'+
+    actions(false,'saveMeta'));
+}
+function saveMeta(){
+  const body={title:$('#mTitle').value.trim()||'我們的婚禮',date:$('#mDate').value,venue:$('#mVenue').value.trim(),guests:parseInt($('#mGuests').value,10)||0,updatedAt:Date.now()};
+  save('meta',()=>updateDoc(wref(),body)); meta={...meta,...body}; render(); closeSheet(); toast('已儲存');
+}
+
+// ---------- 圖片：壓縮後存進資料庫（單張上限約 1MB） ----------
+function loadImg(file){return new Promise((res,rej)=>{const u=URL.createObjectURL(file),im=new Image();im.onload=()=>{URL.revokeObjectURL(u);res(im)};im.onerror=()=>{URL.revokeObjectURL(u);rej(new Error('無法讀取圖片'))};im.src=u})}
+async function compress(file){
+  const im=await loadImg(file); let max=2200;
+  for(let round=0;round<6;round++){
+    const s=Math.min(1,max/Math.max(im.naturalWidth,im.naturalHeight));
+    const c=document.createElement('canvas');c.width=Math.round(im.naturalWidth*s);c.height=Math.round(im.naturalHeight*s);
+    const x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,c.width,c.height);x.drawImage(im,0,0,c.width,c.height);
+    for(const q of [0.85,0.75,0.65,0.55]){const d=c.toDataURL('image/jpeg',q);if(d.length<900000) return d}
+    max=Math.round(max*0.8);
+  }
+  throw new Error('圖片太大');
+}
+$('#fileIn').addEventListener('change',async e=>{
+  const f=e.target.files&&e.target.files[0]; e.target.value=''; if(!f) return;
+  toast('圖片處理中…');
+  try{
+    const img=await compress(f), d=new Date();
+    const r=doc(cref('charts'));
+    await save(r.id,()=>setDoc(r,{img,name:'桌次圖 '+(d.getMonth()+1)+'/'+d.getDate()+' '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0'),createdAt:Date.now()}));
+    toast('已上傳，大家都看得到了');
+  }catch(err){toast('上傳失敗：'+(err.message||'請換一張圖試試'))}
+});
+function view(id){const c=charts.get(id);if(!c)return;$('#vImg').src=c.img;$('#viewer').classList.remove('zoom');$('#viewer').classList.add('open')}
+$('#vImg').addEventListener('click',()=>$('#viewer').classList.toggle('zoom'));
+$('#vClose').addEventListener('click',()=>$('#viewer').classList.remove('open'));
+
+// ---------- events ----------
+$('#main').addEventListener('click',e=>{
+  const t=e.target.closest('button'); if(!t) return;
+  if(t.dataset.toggle){const i=items.get(t.dataset.toggle);if(i) save(i.id,()=>updateDoc(wref('items',i.id),{done:!i.done,updatedAt:Date.now()}))}
+  else if(t.dataset.cycle){const i=items.get(t.dataset.cycle);if(!i)return;const s=VSTAT[(Math.max(0,VSTAT.indexOf(i.status))+1)%VSTAT.length];save(i.id,()=>updateDoc(wref('items',i.id),{status:s,updatedAt:Date.now()}))}
+  else if(t.dataset.edit) openItem(t.dataset.edit);
+  else if(t.dataset.add) openItem(null,{gk:t.dataset.gk,g:t.dataset.g});
+  else if(t.dataset.table) openTable(t.dataset.table);
+  else if(t.dataset.view) view(t.dataset.view);
+  else if(t.dataset.delchart){if(confirm('確定刪除這張桌次圖？所有人都會看不到。')){const id=t.dataset.delchart;save(id,()=>deleteDoc(wref('charts',id)))}}
+  else if(t.id==='addTable') openTable(null);
+  else if(t.id==='uploadBtn') $('#fileIn').click();
+});
+$('#sheet').addEventListener('click',e=>{
+  if(e.target.closest('[data-close]')){closeSheet();return}
+  const t=e.target.closest('button'); if(!t||!editing) return;
+  if(t.id==='saveItem') saveItem();
+  else if(t.id==='saveTable') saveTable();
+  else if(t.id==='saveMeta') saveMeta();
+  else if(t.id==='del'&&editing.id){
+    if(!confirm('確定刪除？所有人都會看不到。')) return;
+    const id=editing.id, coll=editing.kind==='table'?'tables':'items';
+    save(id,()=>deleteDoc(wref(coll,id))); closeSheet(); toast('已刪除');
+  }
+});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeSheet();$('#viewer').classList.remove('open')}});
+$('#tabs').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;tab=b.dataset.tab;ls.set('wp-tab',tab);render();window.scrollTo(0,0)});
+$('#hideDone').addEventListener('click',()=>{hideDone=!hideDone;ls.set('wp-hide',hideDone?'1':'0');render()});
+$('#editMeta').addEventListener('click',openMeta);
+$('#share').addEventListener('click',async()=>{
+  const url=location.href;
+  if(navigator.share){try{await navigator.share({title:meta.title||'婚禮籌備本',text:'婚禮籌備本，點開就能一起編輯',url});return}catch(e){if(e.name==='AbortError')return}}
+  try{await navigator.clipboard.writeText(url);toast('連結已複製，貼到 LINE 給家人就好')}catch(e){prompt('複製這個連結：',url)}
+});
+
+// ---------- 啟動 ----------
+function track(name,map,after){
+  let first=true;
+  onSnapshot(cref(name),{includeMetadataChanges:false},snap=>{
+    const now=Date.now(), fresh=[];
+    snap.docChanges().forEach(ch=>{
+      const id=ch.doc.id;
+      if(ch.type==='removed'){map.delete(id);return}
+      map.set(id,{id,...ch.doc.data()});
+      if(!first&&!snap.metadata.hasPendingWrites&&!(mine.has(id)&&now-mine.get(id)<6000)) fresh.push(id);
+    });
+    first=false; conn=snap.metadata.fromCache?'offline':'live'; after&&after(); loaded=true;
+    fresh.forEach(id=>flash.add(id)); render();
+    if(fresh.length){toast('有人剛更新了 '+fresh.length+' 項');setTimeout(()=>fresh.forEach(id=>flash.delete(id)),1900)}
+  },err=>{console.error(err);conn='offline';render();toast(err.code==='permission-denied'?'無法讀取：請確認 Firestore 規則已發佈':'連線錯誤')});
+}
+async function ensureSeed(){
+  const created=await runTransaction(db,async tx=>{const s=await tx.get(wref());if(s.exists())return false;tx.set(wref(),{...DEFAULT_META,createdAt:Date.now()});return true});
+  if(!created) return;
+  const b=writeBatch(db);
+  SEED.items.forEach(([id,d])=>b.set(wref('items',id),d));
+  SEED.tables.forEach(([id,d])=>b.set(wref('tables',id),d));
+  await b.commit();
+}
+function landing(){
+  $('#hCount').textContent='';$('#hDate').textContent='一起編輯的婚禮籌備本';$('#hPlace').textContent='';
+  $('#main').innerHTML='<div class="landing"><h2>建立你們的籌備本</h2><p>建立後，網址最後會多一串專屬代碼。把整個網址傳給家人，他們打開就能直接編輯，不用登入。</p>'+
+    '<button type="button" class="btn primary" id="create">建立籌備本</button><p style="font-size:13px;margin-top:24px">已經建立過？請直接打開當初分享的那個完整網址。</p></div>';
+  $('#create').addEventListener('click',()=>{location.hash='w='+newId();location.reload()});
+}
+async function start(){
+  if(String(firebaseConfig.apiKey).includes('請貼上')){$('#main').innerHTML='<div class="landing"><h2>還差一步</h2><p>請在 index.html 最上方貼上你的 Firebase 設定，再重新上傳到 GitHub。</p></div>';return}
+  const m=/w=([0-9a-f]{32})/.exec(location.hash);
+  if(!m){landing();return}
+  wid=m[1];
+  const app=initializeApp(firebaseConfig);
+  try{db=initializeFirestore(app,{localCache:persistentLocalCache({tabManager:persistentMultipleTabManager()})})}
+  catch(e){db=initializeFirestore(app,{})}
+  ['#heroBtns','#prog','#toolbar','#tabs'].forEach(s=>$(s).hidden=false);
+  render();
+  onSnapshot(wref(),s=>{if(s.exists()){meta={...meta,...s.data()};render()}},()=>{});
+  try{await ensureSeed()}catch(e){console.error(e)}
+  track('items',items); track('tables',tables); track('charts',charts);
+}
+start();
+</script>
+</body>
+</html>
